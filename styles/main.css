@@ -1,0 +1,729 @@
+﻿/*main css page*/
+
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: #369;
+}
+
+/*@font-face {
+	font-family: BryantRegular;
+	src: url('http://wim.usgs.gov/fonts/Bryant2Combo/Bryant2/Bryant-Regular.otf'), 
+		url('http://wim.usgs.gov/fonts/Bryant2Combo/Bryant2Web_EOT/BryantWebRegular.eot'),
+		url('http://localhost/apps/fonts/Bryant2Combo/Bryant2/Bryant-Regular.otf'),
+		url('http://localhost/apps/fonts/Bryant2Combo/Bryant2Web_EOT/BryantWebRegular.eot') /* IE9 
+}
+
+@font-face {
+	font-family: BryantBold;
+	src: url('http://wim.usgs.gov/fonts/Bryant2Combo/Bryant2/Bryant-Bold.otf'), 
+		url('http://wim.usgs.gov/fonts/Bryant2Combo/Bryant2Web_EOT/BryantWebBold.eot'),
+		url('http://localhost/apps/fonts/Bryant2Combo/Bryant2/Bryant-Bold.otf'),
+		url('http://localhost/apps/fonts/Bryant2Combo/Bryant2Web_EOT/BryantWebBold.eot') /* IE9 
+}*/
+
+@font-face 
+{
+    font-family: 'BryantRegular';
+    src: url('../styles/fonts/Bryant2Web_EOT/BryantWebRegular.eot');
+    src: url('../styles/fonts/Bryant2Web_EOT/BryantWebRegular.eot?#iefix') format('embedded-opentype'),
+        url('../styles/fonts/Bryant2Web_WOFF/BryantWebRegular.woff?#iefix') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#map {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000;
+	padding: 0;
+	z-index: 0;
+	height: 100%;
+	width: 100%;
+}
+
+/*#header {
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 65px;
+	background-color: #59595C;
+	color: #E7E4CE;
+	position: absolute;
+	z-index: 1;
+	display: inline;
+	font-family: BryantRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif ;
+	font-size: 40px;
+}*/
+
+#usgsLogoDiv {
+	float: left;
+	background-color: Black;
+	height: 50px;
+	width: 150px;
+	padding-top: 10px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+
+#usgsLogo {
+	
+}
+
+#title {
+	float: left;
+	padding-right: 5px;
+	padding-left: 10px;
+	padding-top: 10px;
+	font-family: BryantBold,"Lucida Sans Unicode", "Lucida Grande", sans-serif ;
+}
+
+#titleSeparator {
+	color: #F37A49;
+	float: left;
+	padding-right: 5px;
+	padding-top: 10px;
+	font-family: BryantBold, "Lucida Sans Unicode", "Lucida Grande", sans-serif ;
+}
+
+#subTitle {
+	padding-top: 10px;
+}
+
+#betaTitle {
+	float: right;
+	padding: 20px;
+	font-size: 16px;
+	color: #AAAAB5;
+}
+
+#geocodeBar {
+	position: absolute;
+	right: 5px;
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(126, 126, 132);
+	/* RGBa with 0.55 opacity */
+	background: rgba(126, 126, 132, 1.0);
+	/* For IE 5.5 - 7*/
+	/*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7E7E8400, endColorstr=#7E7E8400);*/
+	/* For IE 8*/
+	/*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7E7E8400, endColorstr=#7E7E8400)";*/
+	z-index: 1;
+	border: 1px solid #59595C;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 5px;
+	display: inline;
+	float: right;
+	top: 45px;
+}
+
+#geocodeBar #geocode {
+	width: 122px;
+	height: 15px;
+	font-size: 12px;
+	font-style: italic;
+}
+
+#geocodeBar #searchIcon {
+	width: 15px;
+	height: 15px;
+	vertical-align: middle;
+}
+
+button {
+	height: 16px;
+}
+
+#wimLogo {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	z-index: 40;
+}
+
+#usgsLogo {
+	height: 45px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+#usgsLinks {
+	font-family: BryantRegular;
+	/*src: url('http://wim.usgs.gov/fonts/Bryant2Combo/Bryant2/Bryant-Regular.otf'), 
+		url('http://wim.usgs.gov/fonts/Bryant2Combo/Bryant2Web_EOT/BryantWebRegular.eot'),
+		url('http://localhost/apps/fonts/Bryant2Combo/Bryant2/Bryant-Regular.otf'),
+		url('http://localhost/apps/fonts/Bryant2Combo/Bryant2Web_EOT/BryantWebRegular.eot') /* IE9 */
+	margin-top: 0px;
+	position: absolute;
+	padding-top: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 285px;
+	width: 135px;
+	z-index: 5;
+	background-color: gray;
+	line-height: 1.75;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	box-shadow: 0 0 .25em #000;
+}
+
+.usgsLinksHeader {
+	top: 0px;
+	font-size: 18px;
+	height: 40px;
+	width: 98%;
+	color: white;
+	text-align: center;
+	border: 1px solid #B5BCC7;
+	background-color: black;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	box-shadow: 0 0 0.25em #000;
+}
+
+#loadingStatus {
+	position: absolute;
+	right: 49%;
+	top: 48%;
+	z-index: 99;
+}
+
+#loadingStatusContent {
+	background-color: Black;
+	color: White;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 10px;
+	display: inline;
+	width: 135px;
+}
+
+#layerStuff {
+	position:absolute;
+	top: 155px;
+	right: 0px;
+	z-index: 2;
+	display: inline;
+}
+
+#availableLayers {
+	z-index: 2;
+	right: 0px;
+	border-top-left-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	width: 194px;
+}
+
+#spacer {
+	/*height: 10px;*/
+}
+
+#explanation {
+	margin-top: 10px;
+	position: absolute;
+	/*left: 0px;
+	bottom: 20px;*/
+	z-index: 2;
+	width: 270px;
+	/*border-top-right-radius: 5px;
+	-moz-border-top-right-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;*/
+	border-top-left-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+}
+
+#layersElements {
+	font-size: 22px;
+	font-weight: normal;
+	opacity: 1.0;
+	filter: alpha(opacity=100);
+	padding-bottom: 10px;
+}
+
+#legend {
+	font-family: BryantRegular;
+	/*src: url('http://wim.usgs.gov/fonts/Bryant2Combo/Bryant2/Bryant-Regular.otf'), 
+		url('http://wim.usgs.gov/fonts/Bryant2Combo/Bryant2Web_EOT/BryantWebRegular.eot'),
+		url('http://localhost/apps/fonts/Bryant2Combo/Bryant2/Bryant-Regular.otf'),
+		url('http://localhost/apps/fonts/Bryant2Combo/Bryant2Web_EOT/BryantWebRegular.eot') /* IE9 */
+	background-color: White;
+	color: Black;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 5px;
+	max-height: 400px;
+	overflow: auto;
+}
+
+#mobileLayers {
+	color: Black;
+	visibility: hidden;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	background-color: Black;
+	border-style: solid;
+	border-width: 1;
+	border-color: Black;
+	color: White;
+	z-index: 1;
+	padding: 2px;
+	display: inline;
+}
+
+#backToMap {
+	visibility: hidden;
+	float: right;
+}
+
+#infoWindow {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 50px;
+	width: 50px;
+	background-color: gray;
+	visibility: hidden;
+}
+
+/*#map_zoom_slider {
+ top: 135px;
+ left: 10px;
+ height: 60px;
+ }*/
+.esriSimpleSliderVertical   {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color:#59595C;
+  border: 1px solid #B5BCC7;
+  
+}
+
+.esriSimpleSliderIncrementButton {
+	border-top-left-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-top-right-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	width:25px;
+	height: 25px;
+	border: none !important;
+	opacity:1;
+	
+}
+
+.esriSimpleSliderDecrementButton {
+	border-bottom-left-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	width:25px;
+	height: 25px;
+	border:none; !important;
+	opacity:1;
+}
+
+.esriSimpleSlider {
+  top: 40px;
+  left:10px;
+  border: none !important;
+  color:#fff !important;
+  box-shadow:none !important;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  opacity: 0.7 !important;
+  filter: alpha(opacity=70) !important;
+  background-color: #59595C !important;
+  border-radius:none !important;
+}
+
+.esriSimpleSlider div{
+	-moz-user-select: none;
+    font-family: BryantBold,verdana,helvetica;
+    font-size: 24px;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    width: 25px;
+  
+}
+
+.esriLargeSliderVertical .esriLargeSliderIncrementButton, .esriLargeSliderVertical .esriLargeSliderDecrementButton {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #59595C;
+	color:#59595C; 
+}
+
+.esriLargeSlider {
+	top: 95px;
+	left: 5px;
+	background-color: #59595C; !important;
+	padding-top:2px;
+	padding-left: 2px;
+	padding-bottom:2px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	color: #59595C; !important;
+	opacity:0.7;
+}
+
+.dijitRuleMark {
+	border: 1px solid white; !important
+}
+
+/*.esriLargeSlider div{
+ margin-top:10px;
+ margin-bottom:10px;
+ }*/
+
+#basemapSelector .dijitTitlePaneTitle {
+	background-color: #F37A49;
+	padding: 2px;
+	border: 0px;
+	font-family: BryantRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif ;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+}
+
+#basemapSelector .dijitTitlePaneContentOuter {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+}
+
+#basemapSelector {
+	font-weight: 500;
+	font-size: 15px;
+	color: White;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+	font-family: BryantRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif ;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	z-index: 3;
+}
+
+#basemapSelector img {
+	display: inline;
+	vertical-align: middle;
+}
+
+#basemapSelector .claro .dijitTitlePaneTitle .dijitArrowNode {
+	display: none;
+	
+}
+
+.claro .dijitTitlePaneTitle {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	background-color: Black;!important;
+	color: White;!important;
+	border: 1px solid #B5BCC7;
+	min-height: 25px;
+	padding: 0 7px 3px;
+	vertical-align: middle;
+	background-image: none;
+	background-repeat: no-repeat;
+}
+
+.claro .dijitTitlePane .dijitTitlePaneTextNode {
+	color: white;
+}
+
+.claro .dijitTitlePane {
+	color: white;
+}
+
+.claro .dijitTitlePaneContentInner {
+	padding: 2px;
+	background-color: gray;
+}
+
+.claro .infowindow {
+	background-color: #333
+}
+
+
+
+#userTools {
+	top: 146px;
+	width: 202px;
+	position:absolute;
+	right: 0px;
+	z-index: 2;
+	color:#F37A49;
+}
+
+#filterBox
+{
+	z-index: 2;
+	right: 0px;
+	border-top-left-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	width: 148px;
+}
+
+.infowindow .sprite {
+	height: 1000px;
+	width: 1000px;
+}
+.infowindow .window {
+	color: #000000;
+	font-family: BryantRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif ;
+}
+#currentDate {
+	height:27px;
+	font-size:24px; 
+	vertical-align:text-top;
+	left: 90px;
+	position: absolute;
+	top: 5px;
+	z-index:2;
+	background-color: #59595C;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.InstrSelects {
+	font-size: 15px;
+	padding:3px;
+	width:100%;
+}
+<!--#AppMonthYr {	font-size: 15px;	padding: 3px;}-->
+
+<!-- tabbed container css -->
+
+#searchContainer {
+	position:absolute;	
+	height: 80px;
+	top: 65px;
+	right: 0px;
+	z-index: 2;
+	display: inline;
+	background-color: rgb(89,89,92);
+	border: 1px solid #B5BCC7;
+}
+
+#tabs{
+/*container width/height set in index.html*/
+	margin-bottom:10px;
+	z-index:999;
+	right:0px;
+	border-top-left-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;	
+}
+
+.searchButtons, .clearButtons {
+	height: 20px;
+	width: 85px;
+	color: white;
+	font-family: BryantBold, "Lucinda Sans Unicode", "Lucinda Grande", sans-serif;
+	font-size:11px;
+	border-radius: 5px;
+	-moz-border-radius:5px;
+	border: 0px;
+}
+
+.searchButtons:hover, .clearButtons:hover{
+	box-shadow:0 0 5px #e7e4ce;
+}
+
+.searchButtons{
+	background-color: rgb(243, 122, 73);
+}
+
+.clearButtons{
+	background-color: rgb(89,89,92);
+}
+
+.PrintLimitationButton {
+	background-color: rgb(243,122,73);
+	margin-top: 22px;
+	height:36px;
+	width:169px;
+	font-size:medium;
+	font-family: 'BryantBold';
+	color:#E7E4CE;
+}
+.tabLabel{
+	height:100%;
+	width:100%;
+	font-size:13px;
+	font-family: BryantBold;
+	color:#E7E4CE;
+}
+
+#tabOne, #tabTwo{
+/* Fallback for web browsers that doesn't support RGBa */
+	background: #369;
+	/* RGBa with 0.55 opacity 
+	background: rgba(126, 126, 132, 1.0);*/
+	border: 1px solid #59595C;
+	font-family: BryantRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif ;
+color: #E7E4CE;
+}
+
+/*Expand tabs to fit the width of tab container.  (1/2 total container width for ea. tab)*/
+.dijitTabInner{
+	width: 120px;
+}
+
+.searchInstructions {
+	font-size: 20px;
+	color:#E7E4CE;
+}
+.searchHeaders{
+	font-family: BryantBold;
+	font-size: 16px;
+	color:#79F2F2;
+}
+.indent{
+	margin-left: 30px;
+}
+#projectSearchWrapper{
+	padding:25px;
+	border: 1px solid black
+}
+
+.projectDatePicker, .samplingDatePicker{
+	width: 60px;
+	font-size: 12px;
+}
+
+/*select, input{
+	background:#E7E4CE;
+	border:0px none;
+
+}
+*/
+.claro .dijitTab{
+	background-color: #59595C;
+}
+
+.claro .dijitTabContainerTop-tabs .dijitTab{
+	background-image:none;
+	background-color:#rgb(89,89,92);
+
+}
+.claro .dijitTabContainerTop-tabs .dijitTabChecked{
+	padding-top:none;
+	background-image: none;
+	box-shadow:0 0 5px #e7e4ce;
+	background-color: #F37A49;
+}
+
+.searchButtonDiv{
+	float:right;
+	bottom: 10px;
+}
+.dataField{
+	margin-bottom:5px;
+}
+select{
+	appearance:none;
+	-moz-appearance:none;
+}
+#sliderWrapper {
+    position:absolute; 
+    right: 5px; 
+    top:87px; 
+    z-Index: 1;
+
+    width: 250px;
+    height: 50px;
+    background: #fff;
+    -moz-box-shadow: 0 0 5px #888;  
+    -webkit-box-shadow: 0 0 5px #888;
+    box-shadow: 0 0 5px #888;
+}
+#sliderLabels {
+    position: relative; 
+    top: -1px; 
+    height: 1.2em; 
+    font-size: 80%; 
+    font-weight: bold;
+    font-family: BryantBold;
+    color: #444;
+    padding: 3px;
+    margin: 5px 10px 0 10px;
+}
+#ProductSection {
+	border: gray solid 1px;
+	padding: 5px;
+	padding-bottom: 8px;
+	margin-bottom: 25px;
+}
+#loading
+{
+    display:none;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,0.8);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff'); /* IE */
+    z-index:1000;
+    
+}
+#loadingcontent
+{
+    display:table;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+#loadingspinner
+{
+   display: table-cell;
+   vertical-align:middle;
+   width: 100%;
+   text-align: center;
+   font-size:larger;
+   padding-top:80px;
+   
+}
+.loadingImg
+{
+    content:url("~\Assets\Images\LoadingOrange110.gif");
+}
