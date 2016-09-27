@@ -14,8 +14,8 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>  
 
   <!-- ArcGIS Javascript API and dojo theme references -->
-  <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/claro/claro.css"/>
-  <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css" />
+  <link rel="stylesheet" href="https://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/claro/claro.css"/>
+  <link rel="stylesheet" href="https://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css" />
  <!-- Style sheets -->
   <link rel="stylesheet" media="screen" type="text/css" href="styles/main.css"/>
   <link rel="stylesheet" media="only screen and (max-device-width: 480px)" type="text/css" href="styles/handheld.css"/>
@@ -38,10 +38,10 @@
   </script> 
   
   <!-- ArcGIS Javascript API reference -->
-  <script defer src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/" type="text/javascript"></script>  
+  <script defer src="https://serverapi.arcgisonline.com/jsapi/arcgis/3.5/" type="text/javascript"></script>  
   <!-- references to js for DatePicker -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
   <script defer src="js/basemap.js" type="text/javascript"></script>
   <script defer src="js/geocoder.js" type="text/javascript"></script>
   <script defer src="js/geolocator.js" type="text/javascript"></script>
@@ -235,17 +235,17 @@
                         response(cache[product]);
                         return;
                       } 
-                      $.get("../BLTServices/Products?publishedDate=" + datetime, request, function (data, status, xhr) {
-                        var dataTest = $('PRODUCT', data).map(function () {
+                      $.get("../BLTServices/Products.json?publishedDate=" + datetime, request, function (data, status, xhr) {
+                        var dataTest = $.map( data, function(item) {//}) $('PRODUCT', data).map(function () {
                           return {
-                            value: $("PRODUCT_REGISTRATION_NUMBER", this).text(),
-                            label: $("PRODUCT_NAME", this).text() + " [" + $("PRODUCT_REGISTRATION_NUMBER", this).text() + "]",
-                            id: $("PRODUCT_ID", this).text()
+                            value: item.product_registration_number,// $("product_registration_number", this).text(),
+                            label: item.product_name + " [" + item.product_registration_number + "]",// $("product_name", this).text() + " [" + $("product_registration_number", this).text() + "]",
+                            id: item.product_id// $("product_id", this).text()
                           };
                         });
                         cache[product] = dataTest;
                         response(dataTest);
-                      }, "xml");
+                      }, "json");
                     },
                     position: 
                       { my : "left top", at: "left bottom" },
@@ -279,19 +279,19 @@
                         response(cache[product]);
                         return;
                       } 
-                      $.get("../BLTServices/Products?publishedDate=" + datetime, request, function (data, status, xhr) {
-                        if (data.childNodes[0].textContent == "") {
+                      $.get("../BLTServices/Products.json?publishedDate=" + datetime, request, function (data, status, xhr) {
+                        if (data.length <= 0){//.childNodes[0].textContent == "") {
 
                           alert("no match");
                           $("#prodReg").val("");
                           $("#prodReg").removeClass("ui-autocomplete-loading");                          
                         }
                         else {
-                          var dataTest = $('PRODUCT', data).map(function () {
+                          var dataTest = $.map( data, function(item) {//$('product', data).map(function () {
                             return {
-                              value: $("PRODUCT_REGISTRATION_NUMBER", this).text(),
-                              label: $("PRODUCT_NAME", this).text() + " [" + $("PRODUCT_REGISTRATION_NUMBER", this).text() + "]",
-                              id: $("PRODUCT_ID", this).text()
+                              value: item.product_registration_number, //$("product_registration_number", this).text(),
+                              label: item.product_name + " [" + item.product_registration_number + "]",
+                              id: item.product_id
                             };
                           });
                         
@@ -299,7 +299,7 @@
                           response(dataTest);                          
                           $("#prodReg").removeClass("ui-autocomplete-loading");
                         }
-                      }, "xml");
+                      }, "json");
                     },
                     position: 
                       { my : "left top", at: "left bottom" },
