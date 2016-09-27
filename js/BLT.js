@@ -104,7 +104,7 @@ function init() {
 
 	dojo.connect(map, "onClick", executeMapClickTask);
 	//http://107.20.182.222/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer
-	pulaLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://54.84.207.203/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer", { "visible": true, "opacity": 0.5 });
+	pulaLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bltdev.wim.usgs.gov/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer", { "visible": true, "opacity": 0.5 });
 	pulaLayer.setVisibleLayers([3]);
 	
 	legendLayers.push({layer: pulaLayer, title: "Pesticide Use Limitation Area (PULA)"});
@@ -114,8 +114,7 @@ function init() {
 	var monthYear = dojo.date.locale.format(d, { datePattern: "yyyy-MM", selector: "date" });
 	
 	//layerDefinition to only show effective for public
-	layerDefinitions[3] = "PUBLISHED_TIME_STAMP IS NOT NULL AND EFFECTIVE_DATE <= DATE '" + formatDate + "' AND ((EXPIRED_TIME_STAMP >= DATE '" + monthYear + "') OR (EXPIRED_TIME_STAMP IS NULL))";
-	//layerDefinitions[3] = "PULASHAPEID = 234"
+	layerDefinitions[3] = "published_time_stamp IS NOT NULL AND effective_date <= DATE '" + formatDate + "' AND ((expired_time_stamp >= DATE '" + monthYear + "') OR (expired_time_stamp IS NULL))";
 	pulaLayer.setLayerDefinitions(layerDefinitions);
 	//pulaLayer.setVisibility(true);
 	
@@ -138,13 +137,13 @@ function init() {
         	if (data.length>0){
 				$('#AISelectInput').append($('<option></option>').val(0).html("All"));
             	$.each(data, function(){
-					if (this['INGREDIENT_NAME'].length > 30)
+					if (this['ingredient_name'].length > 30)
 					{
-						$('#AISelectInput').append($('<option></option>').val(this['ACTIVE_INGREDIENT_ID']).html(this['INGREDIENT_NAME'].substring(0,30)).attr('title', this['INGREDIENT_NAME']));
+						$('#AISelectInput').append($('<option></option>').val(this['active_ingredient_id']).html(this['ingredient_name'].substring(0,30)).attr('title', this['ingredient_name']));
 					}
 					else 
 					{
-						$('#AISelectInput').append($('<option></option>').val(this['ACTIVE_INGREDIENT_ID']).html(this['INGREDIENT_NAME']));
+						$('#AISelectInput').append($('<option></option>').val(this['active_ingredient_id']).html(this['ingredient_name']));
 					}
 				});
 			}
@@ -245,7 +244,7 @@ function init() {
 	d = new Date(thisSDate);
 	var formatDate = d.yyyymmdd();
 
-	identifyTask = new esri.tasks.IdentifyTask("http://54.84.207.203/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer");
+	identifyTask = new esri.tasks.IdentifyTask("http://bltdev.wim.usgs.gov/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer");
     //identifyTask.where = "EFFECTIVE_DATE IS NOT NULL";// AND EFFECTIVE_DATE >= DATE '" + formatDate + "'";
 	identifyParams = new esri.tasks.IdentifyParameters();
     identifyParams.tolerance = 5;
@@ -275,15 +274,15 @@ function init() {
 				$("#loading").fadeIn();
                	var feature = result.feature;
                	feature.attributes.layerName = result.layerName;
-                if (feature.attributes.layerName == "Effective" && feature.attributes.EFFECTIVE_DATE != "Null")
+                if (feature.attributes.layerName == "Effective" && feature.attributes.effective_date != "Null")
                 {
                 	var searchDate = $("#currentView").text();
                 	var dateToPass = FormatThisDate(searchDate);
                 	var thisSDate = new Date(FormatThisDate(searchDate));
-                	effectiveDate = new Date(feature.attributes.EFFECTIVE_DATE);
+                	effectiveDate = new Date(feature.attributes.effective_date);
                 	if (effectiveDate <= thisSDate) {
-                		var thisPULAID = feature.attributes.PULA_ID;
-	               		var thisPULASHPI = feature.attributes.PULASHAPEI;
+                		var thisPULAID = feature.attributes.pula_id;
+	               		var thisPULASHPID = feature.attributes.PULASHAPEI;
 					
 						//highlight selected 
 	                	var highlightSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,255,0.35]), 1),new dojo.Color([125,125,125,0.35]));
@@ -334,7 +333,7 @@ function init() {
 													data.MapperLimits[i]["USE"] + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' +
 													data.MapperLimits[i]["APPMETHOD"] + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' +
 													data.MapperLimits[i]["FORM"] + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' +
-													data.MapperLimits[i].LIMIT.CODE + '</td></tr>'
+													data.MapperLimits[i].LIMIT.code + '</td></tr>'
 												);		
 											}
 										}
@@ -347,7 +346,7 @@ function init() {
 													data.MapperLimits[i]["USE"] + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' +
 													data.MapperLimits[i]["APPMETHOD"] + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' +
 													data.MapperLimits[i]["FORM"] + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' +
-													data.MapperLimits[i].LIMIT.CODE + '</td></tr>'
+													data.MapperLimits[i].LIMIT.code + '</td></tr>'
 												);		
 											}	
 										}
@@ -359,16 +358,16 @@ function init() {
 												data.MapperLimits[i]["USE"] + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' +
 												data.MapperLimits[i]["APPMETHOD"] + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' +
 												data.MapperLimits[i]["FORM"] + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' +
-												data.MapperLimits[i].LIMIT.CODE + '</td></tr>'
+												data.MapperLimits[i].LIMIT.code + '</td></tr>'
 											);
 										}	
-										if ($.inArray(data.MapperLimits[i].LIMIT.CODE, codes) == -1)
+										if ($.inArray(data.MapperLimits[i].LIMIT.code, codes) == -1)
 										{
 											//only add them for the ai/prod they chose (if its in the above table)
 											$('#ResultsTable tr').each(function() {
 												var v = $(this).find("td:last").text();
-												if (v == data.MapperLimits[i].LIMIT.CODE) {
-													codes.push(data.MapperLimits[i].LIMIT.CODE);
+												if (v == data.MapperLimits[i].LIMIT.code) {
+													codes.push(data.MapperLimits[i].LIMIT.code);
 													limits.push(data.MapperLimits[i].LIMIT);
 												}
 											});
@@ -377,7 +376,7 @@ function init() {
 									};
 										
 									for(i=0; i < limits.length; i++) {
-										$('#CodeTable tbody').append('<tr><td style="border:#E7E4CE solid 1px;padding:4px">' + limits[i].CODE + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' + limits[i].LIMITATION1 + '</td></tr>')
+										$('#CodeTable tbody').append('<tr><td style="border:#E7E4CE solid 1px;padding:4px">' + limits[i].code + '</td><td style="border:#E7E4CE solid 1px;padding:4px">' + limits[i].limitation1 + '</td></tr>')
 									};
 								}
 
@@ -410,7 +409,7 @@ function init() {
     }
 
     //Geocoder Reference in init function
-    locator = new esri.tasks.Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+    locator = new esri.tasks.Locator("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
     dojo.connect(locator, "onAddressToLocationsComplete", showGeoCodeResults);
 
 	dijit.byId("tabTwo").set('disabled', true);
@@ -513,7 +512,7 @@ function SubmitClick() {
 	$.ajax({
     	dataType: 'json',
         type: 'Get',
-        url: '../BLTServices/PULAs/EffectiveSimplePULAs.json?publishedDate=' + formatDate + '&aiID=' + a + '&productID=' + p,
+        url: '../BLTServices/PULAs/FilteredSimplePULAs.json?date=' + formatDate + '&aiID=' + a + '&productID=' + p,
         headers:{
         	'Accept': '*/*'
         },
@@ -521,7 +520,7 @@ function SubmitClick() {
 			var layerDefs = "";
         	if (data['PULA'].length>0){			
 				$.each(data['PULA'], function(index) {
-					layerDefs += "PULASHAPEID = " + data['PULA'][index].ShapeID + " OR ";
+					layerDefs += "PULASHAPEI = " + data['PULA'][index].ShapeID + " OR ";
 				});
 
 				//remove trailing 'or'
@@ -572,7 +571,7 @@ function LimitationsPDF(existingLimit) {
 	whichPDF = existingLimit;
 
 	//var PTurl = "http://107.20.182.222/arcgis/rest/services/BLT/PrintMapService/GPServer/Export%20Web%20Map";
-	var PTurl = "http://54.84.207.203/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";
+	var PTurl = "http://bltdev.wim.usgs.gov/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";
 	var pt = new esri.tasks.PrintTask(PTurl);
 	
 	var params = new esri.tasks.PrintParameters();
@@ -1125,7 +1124,7 @@ function ClearClick() {
 	var formatDate = dojo.date.locale.format(d, { datePattern: "yyyy-MM-dd", selector: "date" });
 	var monthYear = dojo.date.locale.format(d, { datePattern: "yyyy-MM", selector: "date" });
 	//layerDefinition to only show effective for public
-	layerDefinitions[3] = "PUBLISHED_TIME_STAMP IS NOT NULL AND EFFECTIVE_DATE <= DATE '" + formatDate + "' AND ((EXPIRED_TIME_STAMP >= DATE '" + monthYear + "') OR (EXPIRED_TIME_STAMP IS NULL))";
+	layerDefinitions[3] = "published_time_stamp IS NOT NULL AND effective_date <= DATE '" + formatDate + "' AND ((expired_time_stamp >= DATE '" + monthYear + "') OR (expired_time_stamp IS NULL))";
 	pulaLayer.setLayerDefinitions(layerDefinitions);
 
 	//remove date from results "Effective Date" and Mapper's Current View:
