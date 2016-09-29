@@ -104,7 +104,7 @@ function init() {
 
 	dojo.connect(map, "onClick", executeMapClickTask);
 	//http://107.20.182.222/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer
-	pulaLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bltdev.wim.usgs.gov/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer", { "visible": true, "opacity": 0.5 });
+	pulaLayer = new esri.layers.ArcGISDynamicMapServiceLayer("https://blt.wim.usgs.gov/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer", { "visible": true, "opacity": 0.5 });
 	pulaLayer.setVisibleLayers([3]);
 	
 	legendLayers.push({layer: pulaLayer, title: "Pesticide Use Limitation Area (PULA)"});
@@ -244,7 +244,7 @@ function init() {
 	d = new Date(thisSDate);
 	var formatDate = d.yyyymmdd();
 
-	identifyTask = new esri.tasks.IdentifyTask("http://bltdev.wim.usgs.gov/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer");
+	identifyTask = new esri.tasks.IdentifyTask("https://blt.wim.usgs.gov/arcgis/rest/services/BLT/BLT_PULAsRelated/MapServer");
     //identifyTask.where = "EFFECTIVE_DATE IS NOT NULL";// AND EFFECTIVE_DATE >= DATE '" + formatDate + "'";
 	identifyParams = new esri.tasks.IdentifyParameters();
     identifyParams.tolerance = 5;
@@ -571,7 +571,7 @@ function LimitationsPDF(existingLimit) {
 	whichPDF = existingLimit;
 
 	//var PTurl = "http://107.20.182.222/arcgis/rest/services/BLT/PrintMapService/GPServer/Export%20Web%20Map";
-	var PTurl = "http://bltdev.wim.usgs.gov/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";
+	var PTurl = "https://blt.wim.usgs.gov/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";
 	var pt = new esri.tasks.PrintTask(PTurl);
 	
 	var params = new esri.tasks.PrintParameters();
@@ -708,7 +708,7 @@ function PrintResult(result) {
 			//legal stuff (every page)
 			var legalS1 = "This document contains legal requirements for the use of certain pesticides."
 			var legalS2 = "Do not modify any text, graphics or coloration or otherwise alter this document."
-			var contact1 = "ESPP Contact: ESPP@epa.gov   Phone: 1-800-447-3813"
+			var contact1 = "ESPP Contact: ESPP@epa.gov   Phone: 1-844-447-3813"
 			doc.setFontSize(8);
 			doc.setFontType("bold");
 			doc.text(142, 808, legalS1);
@@ -740,7 +740,7 @@ function PrintResult(result) {
 			//legal stuff (every page)
 			var legalS1 = "This document contains legal requirements for the use of certain pesticides."
 			var legalS2 = "Do not modify any text, graphics or coloration or otherwise alter this document."
-			var contact1 = "ESPP Contact: ESPP@epa.gov   Phone: 1-800-447-3813"
+			var contact1 = "ESPP Contact: ESPP@epa.gov   Phone: 1-844-447-3813"
 			doc.setFontSize(8);
 			doc.setFontType("bold");
 			doc.text(142, 808, legalS1);
@@ -1046,7 +1046,7 @@ function PrintResult(result) {
 			//legal stuff (every page)
 			var legalS1 = "This document contains legal requirements for the use of certain pesticides."
 			var legalS2 = "Do not modify any text, graphics or coloration or otherwise alter this document."
-			var contact1 = "ESPP Contact: ESPP@epa.gov   Phone: 1-800-447-3813"
+			var contact1 = "ESPP Contact: ESPP@epa.gov   Phone: 1-844-447-3813"
 			doc.setFontSize(8);
 			doc.setFontType("bold");
 			doc.text(142, 808, legalS1);
