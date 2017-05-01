@@ -274,14 +274,14 @@ function init() {
 				$("#loading").fadeIn();
                	var feature = result.feature;
                	feature.attributes.layerName = result.layerName;
-                if (feature.attributes.layerName == "Effective" && feature.attributes.effective_date != "Null")
+                if (feature.attributes.layerName == "Effective" && feature.attributes.effective_date != "Null" && feature.attributes.expired_time_stamp == "Null")
                 {
                 	var searchDate = $("#currentView").text();
                 	var dateToPass = FormatThisDate(searchDate);
                 	var thisSDate = new Date(FormatThisDate(searchDate));
                 	effectiveDate = new Date(feature.attributes.effective_date);
                 	if (effectiveDate <= thisSDate) {
-                		var thisPULAID = feature.attributes.pula_id;
+                		//var thisPULAID = feature.attributes.pula_id;
 	               		var thisPULASHPID = feature.attributes.PULASHAPEI;
 					
 						//highlight selected 
@@ -298,7 +298,8 @@ function init() {
 	               		$.ajax({
 				    		dataType: 'json',
 				        	type: 'Get',
-				    	    url: '../BLTServices/PULAs/' + thisPULAID + '/LimitationsForMapper.json?ShapeID=' + thisPULASHPID + '&EffectDate=' + dateToPass,
+				    	    //url: '../BLTServices/PULAs/' + thisPULAID + '/LimitationsForMapper.json?ShapeID=' + thisPULASHPID + '&EffectDate=' + dateToPass,
+				    	    url: '../BLTServices/PULAs/LimitationsForMapper.json?ShapeID=' + thisPULASHPID + '&EffectDate=' + dateToPass,
 				        	headers:{
 				    	    	'Accept': '*/*'		
 					        },
