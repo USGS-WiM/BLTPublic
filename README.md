@@ -8,12 +8,12 @@ Javascript mapping application showing Pesticide Use Limitations for protected s
 ##Update
 2017-10-25: Deprecated 
 
-###this repo is part of a discontineud effort and is no longer being actively maintained. 
+###this repo is part of a discontinued effort and is no longer being actively maintained. 
 
 
 ## Authors
 
-* **[Tonia Roddick](PROFILE_PAGE_URL_HERE)**  - *Lead Developer* - [USGS Web Informatics & Mapping](https://wim.usgs.gov/)
+* **[Tonia Roddick](https://cms.usgs.gov/users/troddickusgsgov)**  - *Lead Developer* - [USGS Web Informatics & Mapping](https://wim.usgs.gov/)
 
 ## License
 
